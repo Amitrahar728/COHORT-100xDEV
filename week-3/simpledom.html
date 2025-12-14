@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do</title>
+</head>
+<body>
+
+    <h1>ToDo List</h1>
+    <h4>Take class</h4>
+    <h4>Learn Development</h4>
+    <h4>keen learner</h4>
+    <h4> time </h4>
+    <div>
+        <input type="text"></input>
+        <button onclick = "addTodo()">Add into ToDo</button>
+    </div>
+    <div class = "Timer"> 
+        <h4>Timer : 00</h4>
+    </div>
+    <script>
+        function addTodo() {
+            const inpute = document.querySelector("input");
+            console.log(inputEl.value);
+        }
+
+        let ctr =0;
+        function callback(){
+            document.querySelectorAll("h4")[3].innerHTML = ctr
+            ctr =ctr+1;
+        }
+       
+        setInterval(callback , 1000);
+        
+    </script>
+</body>
+</html>
