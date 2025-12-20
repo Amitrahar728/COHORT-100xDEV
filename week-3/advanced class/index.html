@@ -1,0 +1,94 @@
+<!-- Revision of the last Class  -->
+<!-- in first 15 minutes -->
+<!-- <html>
+    <body>
+        <h1>TO DO</h1>
+        <input type="text"></input>
+        <button onclick = "Addtodo()">Add todo</button>
+    </body>
+    <script>
+        let ctr = 0;
+        function Addtodo(){
+            const value = document.querySelector("input").value;
+
+            const newdiv = document.createElement("div");
+            newdiv.setAttribute("id", ctr);
+            newdiv.innerHTML = "<div>"+value+"</div><button onclick='deletetodo("+ctr+")'>deletetodo</button>";
+            document.querySelector("body").appendChild(newdiv);
+            ctr = ctr+1;
+        }
+        function deletetodo(id){
+            const element = document.getElementById(id);
+            element.parentNode.removeChild(element);
+        }
+    </script>
+</html> -->
+
+
+<!-- 1st thing
+ Learn to append multiple things first inside something and add then that div inside body 
+ <body>
+     <input type="text"></input>
+     <button onclick = "addtodo()"> Add ToDo! </button>
+    <script>
+        function addtodo(){
+            const value = document.querySelector("input").value;
+            const spanEl = document.createElement("span");
+            const buttonel = document.createElement("button");
+            spanEl.innerHTML = value;
+            buttonel.innerHTML = "Delete";
+            const divel = document.createElement("div");
+            divel.appendChild(spanEl);
+            divel.appendChild(buttonel);
+
+            document.querySelector("body").appendChild(divel);
+        }
+        
+    </script>
+</body>
+-->
+
+
+<!-- State derived frontends -->
+
+<!-- Updating dom was very tidious task for good developers so companies start state and components -->
+<!-- state: the variable part of the frontend  -->
+ <!-- component : how to render state on screen  -->
+  <!-- rendering : take the state and render it on DOM based upon the components -->
+
+<body>
+     <input type="text"></input>
+     <button onclick = "addtodo()"> Add ToDo! </button>
+     <div class="todos"></div>
+    <script>
+        let todos =[];
+        function addtodo(){
+            todos.push({
+                title:document.querySelector("input").value
+            })
+            render();
+        } 
+        function deletetodo(){
+            todos.splice(todos.length-1,1);
+        }
+        function deletefirsttodo(){
+            todos.splice(0,1);
+        }
+        
+        function render(){
+            document.querySelector("#todos").innerHTML = "";
+            for(let i =0; i<todos.length; i++){
+                const todo = todos[i];
+                const div = document.createElement("div");
+                const h1 = document.createElement("h1");
+                const button = document.createElement("button");
+                button.innerHTML = "Delete";
+                h1.innerHTML = todo.title;
+                div.append(h1);
+                div.append(button);
+                document.querySelector("#todos").appendChild(div); 
+            }
+        }
+        
+    </script>
+</body>

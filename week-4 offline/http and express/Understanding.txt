@@ -1,0 +1,51 @@
+HTTP : you wrote any logic but  for exposing your logic to the world so everyone can get to know what you build 
+you need http server for this .
+
+HOW TO BUILD :
+EXPRESS is one of the way to build http by which we can get connected to world 
+
+Express is not directly built inside node we have to install it explicitly like fs is pre installed just before use we write const fs = require("fs")
+for express first in the folder we have to call : npm install express
+
+
+------------------------------------------------------------------------
+the logic in code and the browser : -
+
+
+as our system have a localhost 
+on which at any port on which we want our browser to listen to our request we add it in listen(port no.)
+and then open that like localhost:3000
+and then after comes specifications 
+like we can add routes by 
+localhost:3000/asd -> here /asd is a route 
+and after route we can adds inputs if that route is redirecting to such functionality which need some input to proceed like 
+localhost:3000/asd?n=3 -> ?n=3 is the input where we are providing 3 as input -> these are known as query parameters
+which is collected by our route via req.query.n; this will provide them the input which is given by us to the n.
+
+
+
+------------------------------------------------------------------------------------
+
+Request methods :- defined while defining 
+
+GET : when you are asking something from browser .
+POST : when you are going to put something like post on linkedin .
+PUT : updating something from the browser .
+DELETE: deleting something from the browser .
+
+
+-------------------------------------------------------------
+ERRORS:
+200 : Everything is okk
+300 : if you ask for some route but that route is not present in your code.
+500 : something wrong is in your code like error or infinite loop in your called route 
+411 : inputs were incorrect from the users end 
+
+and many more which are not vastly used ...
+
+
+------------------------------------------------------------------------
+
+sending request in post request in post request we provide something to the browser which is needed to be done in the current data .
+so 1 way is by browser
+2nd is postman

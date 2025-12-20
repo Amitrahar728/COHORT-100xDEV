@@ -1,0 +1,29 @@
+ Middleware :
+ -> The person sitting inmiddle which verifies and the legitimate person are allowed to proceed.
+ -> 
+
+ --------------------------------------------------------------------------------
+Example :-
+Ticket checker before you enter the amusement park is also a middleware even according to express
+amusement park is also a middleware
+
+------------------------------------------------------------------------
+Can do some things:-
+
+Execute any code 
+make changes to the request and the response objects 
+End the request-response cycle 
+call the next middleware function in the stack .
+
+
+-------------------------------------------------------------------------------
+
+why to use different middlewares :
+Instead use a same middleware which is simple 
+-> Example : for different rides we need different specification like 5ft height , 14 years of age which can be checked by one more middleware and a comman one middleware for simple entry 
+-> for specific things we use different middlewares .
+
+------------------------------------------------------------------------------------
+You are needed to solve middleware for request count , ratelimiter , errorcount .
+
+

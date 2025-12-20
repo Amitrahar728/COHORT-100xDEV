@@ -1,0 +1,26 @@
+"name": "prac",
+name your website
+
+"version":"1.0.0" 
+tells us the current version of code
+
+"main":"index.js",
+This is the entry point of coding 
+
+
+scripts : dev specified scripts->  you are just naming come code to some specific name 
+like:
+"start":"node script.js";
+
+others are just metadata
+
+WE will learn dependencies too for this .
+
+
+//version shoes in three parts 
+"chalk" :"^5.3.0"
+
+these three are :
+MAJORCHANGES , MINOR CHANGES , BUGS SOLVED ONLY
+based upon how much things are updated
+^ -> this sign let them install latest version whenever someon their device do npm install for installing our dependencies in their system
