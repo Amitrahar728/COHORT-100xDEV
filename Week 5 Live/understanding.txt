@@ -1,0 +1,36 @@
+Done last week:
+Domain name/IP
+methods : get push put delete
+port : 3000 30001 443
+plaintext vs  json vs html response 
+status code : 404 , 200
+body -> methods like put need some input in body 
+routes  -> after port what you want on current server 
+express -> framework to create http servers in node.json
+
+
+Today :
+
+headers : Extra metadata you want to send .like authorization(password , profile photo) , content etc.
+response headers and request headers -> in network tab on inspect
+
+request headers ->
+
+->
+Different type of headers(request headers)
+authorization : browser by their own sometimes send your user and password to the browser by their own in headers in cookies section based on which a different html is provided to us 
+content
+referer
+
+
+(response headers ) comes from the server 
+
+
+
+
+
+
+
+--------------------------------------------------------------------------------
+when you click google.com the first request hits as google.com in network tab but there are a lot of background requests which are hitting http server somehow 
+
