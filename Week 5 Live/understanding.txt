@@ -34,3 +34,30 @@ referer
 --------------------------------------------------------------------------------
 when you click google.com the first request hits as google.com in network tab but there are a lot of background requests which are hitting http server somehow 
 
+--------------------------------------------------------------------------------------------
+Middleware:-
+
+in express , middleware have access to req, res, next variables in the request response cycle of a application
+the function which is directly called is also a middleware but if add any new middleware inbetween we add next variable these for next step 
+used for authentication mostly
+have access to request then we can use req
+
+express.json middleware :- 
+in express if we are sending json data in a post request then we need to parse the json data first by middleware 
+-> this is expected from middlewares as we know .
+->if we dont use app.use(express.json()) we dont get anything in req.body 
+
+
+
+--------------------------------------------------------------------
+ cors : cross origin resource sharing 
+ how something get something on other endpoint 
+
+ after first request sent by user other request have a request header which is set by browser in headers as referer from where it is coming
+ So, if anyone recieve request from other origin that doesnt belong so they should block this request 
+ if we are using fetch we cannot access any other by different origin because they block requests by default
+
+ have permission and build cross origin resource sharing middleware 
+ so that the right frontend can hit correct backend .
+
+ 
