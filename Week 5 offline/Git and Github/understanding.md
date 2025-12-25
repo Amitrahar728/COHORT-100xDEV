@@ -18,6 +18,7 @@ C -> Commited
 
 -----------------------------------------------------
 for adding changes and from untracked to staged or added just stage them and commit them but not sync them 
+// ye files aise hi saved hai bss inme commands run krke dekha h bss 
 
 for checking all checkpoint :
 enter => git log --oneline
