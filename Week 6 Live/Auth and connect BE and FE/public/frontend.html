@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auth Website</title>
+    
+    
+    
+</head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.7/axios.min.js"></script>
+
+<script>
+    async function signup(){
+            const username = document.getElementById("signupusername").value;
+            const password = document.getElementById("signuppassword").value;
+
+            const response = await axios.post("http://localhost:3000/signup",{
+                username : username,
+                password : password
+            });
+
+            alert("you are signed up");
+    }
+    async function logout() {
+        localStorage.removeItem("token");
+    }
+
+    async function signin() {
+        const username = document.getElementById("signin-username").value;
+        const password = document.getElementById("signin-password").value;
+
+        const response = await axios.post("http://localhost:3000/signin", {
+            username: username,
+            password: password
+        });
+
+        localStorage.setItem("token", response.data.token);
+
+        alert("Signed in successfully");
+        getuserinfo();
+    }
+
+    async function getuserinfo() {
+    try {
+        const response = await axios.get("http://localhost:3000/me", {
+            headers: {
+                token: localStorage.getItem("token")
+            }
+        });
+
+        // Use Template Literals (backticks) for better formatting
+        document.getElementById("Information").innerHTML = `
+            <p><strong>Username:</strong> ${response.data.username}</p>
+            <p><strong>Password:</strong> ${response.data.password}</p>
+        `;
+    } catch (error) {
+        alert("Failed to fetch user info: " + error.response.data.msg);
+    }
+}
+   
+    async function logout() {
+        localStorage.removeItem("token");
+    }
+</script>
+<body>
+    <div>
+        Signup
+        <input id ="signupusername"type="text" name ="username" placeholder = "username">
+        <input id ="signuppassword" type="password" name = "password" placeholder = " password ">
+        <button onclick = "signup()"> Submit </button>
+    </div>
+    <div>
+        Signin
+        <input type="text" id ="signin-username" name ="username" placeholder = "username">
+        <input type="password" id = "signin-password" name = "password" placeholder = " password ">
+        <button onclick ="signin()"> Submit </button>
+    </div>
+   <div>
+    User Information: 
+    <div id = "Information"></div>
+   </div>
+   <div>
+   <button onclick = "logout()"> Logout </button>
+   </div>
+</body>
+</html>
