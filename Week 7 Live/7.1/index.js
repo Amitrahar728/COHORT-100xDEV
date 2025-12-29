@@ -3,27 +3,66 @@ const { UserModel, TodoModel } = require("./db");
 const { auth, JWT_SECRET } = require("./auth");
 const jwt = require("jsonwebtoken");
 const mongoose = require("mongoose");
+const bcrypt = require("bcrypt");
+const {z} = require("zod");
+require('dotenv').config();
 
 
-mongoose.connect("mongodb+srv://amitrahar728_db_user:Iamamit%401222@cluster0.ffppzdd.mongodb.net/Todo-app-database");
+
+mongoose.connect(process.env.mongodbacc);
 
 const app = express();
 app.use(express.json());
 
+
+
 app.post("/signup", async function(req, res) {
-    const email = req.body.email;
-    const password = req.body.password;
-    const name = req.body.name;
-    // console.log("DEBUG: Connecting to ->", process.env.MONGO_URL);
-    await UserModel.create({
-        email: email,
-        password: password,
-        name: name
+    const requiredbody = z.object({
+        email: z.string().trim().email().min(3).max(100),
+        name: z.string().trim().min(3).max(100),
+        password: z.string()
+            .min(8, { message: "Length of your password is less than 8" })
+            .max(20, { message: "Length of your password is more than 20" })
+            .refine((pw) => /[A-Z]/.test(pw), { message: "No uppercase letter present" })
+            .refine((pw) => /[a-z]/.test(pw), { message: "No lowercase letter present" })
+            .refine((pw) => /[0-9]/.test(pw), { message: "No integer value present" })
+            .refine((pw) => /[!@#$%^&*]/.test(pw), { message: "No special character present" })
     });
+
+    const parsedData = requiredbody.safeParse(req.body);
+
+    if (!parsedData.success) {
+        return res.status(400).json({
+            msg: "Validation Failed",
+
+            errors: parsedData.error.issues.map(err => err.message) 
+        });
+    }
+
     
-    res.json({
-        message: "You are signed up"
-    })
+    const { email, password, name } = parsedData.data;
+
+    try {
+        const hashedpassword = await bcrypt.hash(password, 5);
+
+        await UserModel.create({
+            email: email,
+            password: hashedpassword,
+            name: name
+        });
+
+        return res.json({
+            message: "You are signed up"
+        });
+
+    } catch(e) {
+        console.error("Database Error:", e.message);
+        
+        
+        return res.status(409).json({
+            msg: "User already exists or database error"
+        });
+    }
 });
 
 
@@ -32,11 +71,20 @@ app.post("/signin", async function(req, res) {
     const password = req.body.password;
 
     const response = await UserModel.findOne({
-        email: email,
-        password: password,
+        email: email
     });
 
-    if (response) {
+    if(!response){
+        res.status(403).json({
+            msg :"user does not exist in your db"
+        })
+        return 
+    }
+
+    const passwordmatch = await bcrypt.compare(password , response.password);
+
+
+    if (passwordmatch) {
         const token = jwt.sign({
             id: response._id.toString()
         }, JWT_SECRET);
