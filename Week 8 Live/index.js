@@ -2,23 +2,27 @@ const express = require("express");
 const jwt = require("jsonwebtoken");
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
-const {z} = require("zod");
-const { auth, JWT_SECRET } = require("./auth");
+// const { auth, JWT_SECRET } = require("./auth");
+require('dotenv').config();
 
 const { userrouter } = require("./routes/user");
 const {courserouter } = require("./routes/course");
 const {adminrouter } = require("./routes/admin");
 const app = express();
   
-app.use("/api/v1/user" , auth , userrouter);
-app.use("/api/v1/course" , auth , courserouter );
-app.use("api/v1/admin" ,auth , adminrouter);
+
+app.use(express.json());
+app.use("/api/v1/user" ,  userrouter);
+app.use("/api/v1/course" ,  courserouter );
+app.use("/api/v1/admin" , adminrouter);
 
 async function main(){
-        await mongoose.connect(mongodbacc);
-        
+        if (mongoose.connection.readyState === 0) { // 0 = disconnected
+        await mongoose.connect(process.env.mongodbacc);
+        console.log("Connected to MongoDB");
+         }
         app.listen(3000);
-        console.log("liestning on port 3000 now ")
+        
 }
 
 main()

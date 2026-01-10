@@ -9,7 +9,6 @@ require('dotenv').config();
 
 
 
-mongoose.connect(process.env.mongodbacc);
 
 
 const users = new Schema({
