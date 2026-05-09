@@ -1,0 +1,64 @@
+WHY typescript ??
+
+There are two type of languages :
+
+strongly typed :
+C++, java , c, rust 
+provides us less runtime error when in real users are using our backend 
+Easy to catch errors
+
+
+
+Loosely typed:
+Easy to write but needs low learning cause runtime errors mostly 
+
+
+
+
+What is typescript :
+Developed by microsoft 
+superset of javascript: becasue we make js code strict in typescript
+
+
+
+how does typescript runs :
+1.) first we compile .ts file to .js file by compiling like checking for type code.
+2.) it takes one more step to compile ts code its not as easy as javascript
+3.) Provide type for variables of javascript strictly 
+
+
+We use TSC Compiler
+
+
+why we need TSC
+-> Because there is something called type inferencing.
+-> In typescript written return type of a function is implicitly he is smart enough to know that number + number is always a number similarly string + num is also a string 
+-> We cna easily provide function type while calling in another function .
+function delayedfunc(anotherfunc : ()=> void)
+{
+    setTimeout(anotherfunc, 1000);
+}
+function log(){
+    console.log("HELLO AMIT");
+}
+
+delayedfunc(log);
+
+
+Some things you should know : 
+
+//  TARGET in TS :
+// IT IS A TOOL in tsconfig.js wehre we can change our typscript ECMA version to any version present in past 
+
+// ECMASCRIPT :
+// Every year new code comes up inside js so chrome v8 , firefox spidermonkey should get updated so that we are able to run new js commands/
+
+
+//rootDir : main files which needs to be pushed always inside code like ts files.
+//outDir : the javascript files which you want to keep in one place becuase there is no need to push them then gitignore them 
+-> by going in tsconfig.js we can define it 
+
+//  rootDir : means that we can structure  our typescript in one folder src 
+//  outDir : means that we can structure our js codes in outDir an dgitignore it 
+
+
