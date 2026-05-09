@@ -1,0 +1,4 @@
+Flex: 
+
+if we want to place divs side by side in horizontal way 
+
