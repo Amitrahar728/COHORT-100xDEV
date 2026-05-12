@@ -1,0 +1,16 @@
+We are building second brain where we can put links , 
+anything which we want to see after some time again to keep notes of them
+
+
+
+IN FUTURE : (USING GENAI)
+
+Give users a feature to search about there saved tweets example trump and provide them to GPT 
+with tags of Trump and then GPT will return us the stance of trump based upon 
+our saved post  Picking up all tags .
+
+
+how we pick closely related things here:  
+in GPT there are multiple vectors embeddings like [183,234893,2384723,3248973,3897] data got converted in embedding then searched by GPT
+So similarly we create query into embedding and our stored data also coverted into vector database enbeddings then we can easily check which vectors
+are nearby to it and then upon searching something -> convert it to vector -> then search in vector database (pick closest and then search on GPT easily).
