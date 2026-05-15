@@ -15,9 +15,8 @@ enum contenttype{
 
 type con ={
     link : string;
-    type : contenttype ;
-    title : string;
-    tags: string[];
+    title : string ;
+    tags: mongoose.Types.ObjectId;
     userId : mongoose.Types.ObjectId;
 }
 
@@ -35,12 +34,8 @@ const Users = new Schema<user>({
 })
 
 const Content = new Schema<con>({
-    title: {type: String},
-    link : {type : String },
-    type:{
-        type: String,
-        enum : Object.values(contenttype)
-    },
+    title: {type: String, required: true},
+    link : {type : String , required: true},
     tags: [{type: mongoose.Types.ObjectId , ref:'Tags'}],
     userId :  { type: Schema.Types.ObjectId, ref: "Users" , required :true},
 

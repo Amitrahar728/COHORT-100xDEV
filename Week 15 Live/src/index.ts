@@ -1,15 +1,18 @@
 import express from "express";
 //  Always import like this
-const app = express();
+import dotenv from "dotenv";
 import mongoose from "mongoose";
 import jwt from "jsonwebtoken";
-const jwtsecretkey = "amit12345";
 import bcrypt from "bcrypt";
-const JWT_SECRET = process.env.secretkey as string;
 import z, { string } from "zod";
+import { UserModel, LinkModel, TagsModel, ContentModel } from "./db.js";
+import { NOTIMP } from "dns";
 
-import dotenv from "dotenv";
+import { userMiddleware } from "./middleware.js";
+
 dotenv.config();
+const app = express();
+import { JWT_PASSWORD } from "./config.js";
 mongoose
     .connect(process.env.mongodb_acc as string)
     .then(() => console.log("MongoDB connected successfully"))
@@ -17,8 +20,6 @@ mongoose
 
 // y1SID3XKDaeYa7cd <---- password of this database
 // amitrahar728_db_user <<--------------username
-import { UserModel, LinkModel, TagsModel, ContentModel } from "./db.js";
-import { NOTIMP } from "dns";
 app.use(express.json());
 
 //  Express code is still in javascript but when ts come into the picture
@@ -87,7 +88,7 @@ app.post("/api/v1/signup", async (req, res) => {
 });
 
 app.post("/api/v1/signin", async (req, res) => {
-    const username = req.body.email;
+    const username = req.body.username;
     const password = req.body.password;
 
     const response = await UserModel.findOne({
@@ -108,7 +109,7 @@ app.post("/api/v1/signin", async (req, res) => {
             {
                 id: response._id.toString(),
             },
-            JWT_SECRET,
+            JWT_PASSWORD,
         );
 
         res.json({
@@ -120,17 +121,129 @@ app.post("/api/v1/signin", async (req, res) => {
         });
     }
 });
-app.post("/api/v1/content", async (req, res) => {
-    username: req.body.username;
-    password: req.body.password;
-
+app.post("/api/v1/content", userMiddleware, async (req, res) => {
+    const link = req.body.link;
+    const title = req.body.title;
+    const tags = req.body.tags;
+    try {
+        await ContentModel.create({
+            link,
+            title,
+            userId: new mongoose.Types.ObjectId(req.userId),
+            tags: tags || []
+        })
+        res.json({ msg: "Content Added" });
+    }
+    catch (e) {
+        console.log(e)
+        res.status(500).json({
+            msg: "Error adding content"
+        });
+    }
 
 
 });
-app.get("/api/v1/content", (req, res) => { });
-app.delete("/api/v1/content", (req, res) => { });
-app.post("/api/v1/brain/share", (req, res) => { });
-app.get("/api/v1/brain/:shareLink", (req, res) => { });
+
+
+
+
+app.get("/api/v1/content", userMiddleware, async (req, res) => {
+    const userId = req.userId;
+    if (!userId) {
+        return res.status(403).json({ msg: "You are not logged in" });
+    }
+
+
+    const content = await ContentModel.find({
+        userId: new mongoose.Types.ObjectId(req.userId)
+    }).populate("userId", "username")//by populate we can fetch some things from reffered places
+    
+    
+    res.json({
+        content
+    })
+});
+
+
+
+
+app.delete("/api/v1/content", userMiddleware, async (req, res) => {
+    const contentId = req.body.contentId;
+
+    try {
+        await ContentModel.deleteOne({
+            _id: contentId,
+            userId: new mongoose.Types.ObjectId(req.userId)
+        });
+
+        res.json({
+            msg: "Content deleted"
+        });
+    } catch (e) {
+        res.status(500).json({
+            msg: "Error deleting content"
+        });
+    }
+});
+
+
+
+app.post("/api/v1/brain/share", userMiddleware, async (req, res) => {
+    const share = req.body.share;
+    try {
+        if (share) {
+            await LinkModel.create({
+                userId: new mongoose.Types.ObjectId(req.userId),
+                hash: Math.random().toString(36).substring(2)
+            });
+
+            res.json({
+                msg: "Shareable link created"
+            });
+        } else {
+            await LinkModel.deleteOne({
+                userId: new mongoose.Types.ObjectId(req.userId)
+            });
+
+            res.json({
+                msg: "Link removed"
+            });
+        }
+    } catch (e) {
+        res.status(500).json({
+            msg: "Error updating share settings"
+        });
+    }
+});
+
+
+app.get("/api/v1/brain/:shareLink", async (req, res) => {
+    const hash = req.params.shareLink;
+
+    try {
+        const link = await LinkModel.findOne({ hash });
+
+        if (!link) {
+            return res.status(404).json({
+                msg: "Invalid share link"
+            });
+        }
+
+        const content = await ContentModel.find({
+            userId: link.userId
+        });
+
+        res.json({
+            content
+        });
+    } catch (e) {
+        res.status(500).json({
+            msg: "Error fetching shared content"
+        });
+    }
+});
+
+
 
 app.listen(3000, () => {
     console.log("Server running on port 3000");
