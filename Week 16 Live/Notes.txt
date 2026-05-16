@@ -1,0 +1,44 @@
+websockets provide us a way to establish a persistent , full duplex communication 
+channel over a single TCP connection between the client and the server
+
+
+Persistant : there will a path which can be used multiple times browser can send 
+as many as he want 
+
+full duplex : means can send multiple requests and response from both end like websocket and browser both can 
+
+Websocket are required for RTC(real time communication).
+
+
+
+In a HTTP Protocol communication that is not persistant as it is based on 
+3 way handshake which takes alot of time and can send only one reply over 
+one time 3 -way handshake 
+
+If we are restricted to use an http server we can use polling and long polling .
+like leetcode uses polling at first it captures our submission and then around 5 or 6 times it checks 
+our submission multiple times is my solution correct using check endpoint
+
+
+
+
+
+------------------------------------------------------------------
+
+Scaling & optimization 
+
+There are multiple servers and there states are stored in the database
+when sales go high start more servers and after that remove some servers
+
+A database is a common place where we store data usually .
+
+we cannot store websockets inside database.
+scaling up and scaling down is too hard thats why we need to learn scaling
+
+
+Solution : Pub-Sub : the multiple web sockets need to talk with each other also and that is done by Pub-Sub 
+
+
+Websockets are only used for real time messages but for previous msgs when your mobile is dead were sent by HTTP server only 
+first we develop http connection and restore previous chats and then connect to websocket for real time messages.
+
