@@ -79,3 +79,14 @@ async function insertData(username: string, email: string, password: string) {
 
 // Example usage
 insertData('username5', 'user5@example.com', 'user_password').catch(console.error);
+
+
+
+-------------------------------------------------------------------------
+today we are going to learn :
+
+Relationships , joins , indexes 
+
+Relationships:
+
+Here alot of things are there to learn 
