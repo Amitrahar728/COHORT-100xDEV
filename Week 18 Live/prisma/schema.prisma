@@ -1,0 +1,25 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id       Int    @id @default(autoincrement())
+  username String @unique
+  password String
+  age      Int
+  city     String
+}
+
+model Todo{
+  id Int@default(autoincrement()) @id
+  title String
+  Description String
+  done Boolean
+  userId Int 
+  
+}
