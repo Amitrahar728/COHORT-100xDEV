@@ -31,4 +31,4 @@ Advantages:
 
 1.) Server side rendering : dynamic file generated everytime request raised .
 
-2.)
+2.) 
