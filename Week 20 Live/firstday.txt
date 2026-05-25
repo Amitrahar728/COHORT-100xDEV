@@ -1,0 +1,147 @@
+
+1.) Route groups ()
+One simple way of defining routes in next.js is just create 
+one folder and put page.tsx and the folder name becomes the specific route from where we can 
+fetch that page.tsx content
+
+but if uses () brackets around folder name like 
+
+App
+----(bounty)/dispense
+
+so we can directly fetch dispense now 
+localhost:3000/dispense no need to write bounty 
+
+
+Why we need route groups:
+
+1.) Can easily index different folders together 
+
+2.) Layout can be defined together : 
+    when we want to create multiple page and wrap them inside one same layout .
+
+what is the use of it common layout :
+think about header and footer they are always part of our application at every page so define it in main layout.tsx 
+
+the main advantage of it is if you want to define for some pages not all then we can group routes using () this can be done by if else too but thats not a good practice
+if we define in a folder name (auth) there can be multiple route signin signup and if we define layout.tsx in this folder all the children nodes got this layout.tsx bydefault
+can also be done without route groups but better way is this or 
+
+
+think what if two folders (bla) and (bla2) but have same route inside due to route groups both having same name we havet o write only that route name 
+
+-> if two routes inside route groups have same names it provides us a build error .
+
+---------------------------------------------------------------------------------
+
+Dynamic routes []
+
+Some things are dynamic which keep on changing always
+like blogs 
+so we can define dynamic route as [blogid] instead of defining route for each blog 
+look at the folder blog you will get why we need dynamic routes
+think yourself if your website is of blogs you cannot create diffferent folder and page.tsx for all pages/blogs
+
+
+
+--------------------------------------------------------------------------------------
+
+
+Catch all 
+how can we catch all the folders or pages which comes under some route
+look at blog2 folder .
+So , in blog 2 we have to create page.tsx for every single page inside it.
+
+Solution is blog2sol folder
+
+all comes inside page.tsx of ...blogs folder
+and every route inside it follows that particular page.tsx
+
+
+
+----------------------------------------------------------------------------------
+
+Catch all [[...slug]]
+when we create [...folder]
+this which catches all the routes inside it in same page.tsx
+this does not catch blog2sol then outside one for which we need to create a different page.tsx
+A very small thing never used mostly but can be used if you need
+blog2sol will also be taken by page.tsx defined inside it by catch [[...slug]]
+
+---------------------------------------------------------------------------------
+
+Client side rendering:
+
+means ki browser pr rendering ho rhi hai client k end pr (react m client dsdie rendering bohot hoti ha)
+react has client side rendering for everything first html comes is empty with some script files
+so from server it comes as empty. 
+Also comes in next.js but initial empty thing not comes in next.js because data comes after server side rendering 
+
+
+-------------------------------------------------------------------------------------------
+Server - side rendering :
+
+Means next.js provides data at first request in index only by using server rendering server keep running and ask for data from database
+
+-----------------------------------------------------------------------------------------------
+
+Statically generating :
+Next.js is smart enough it know somethings that can be statically generated like home page it always cam same for everyone
+the pages where no user specific task is generating .
+
+We can even force them as client side and server side tendered too .
+
+these pages are too fast because no rendering is happening at that end
+A portfolio website can be simply fully statically generated
+but if alot of pages are statically generated build time increases a lot many times.
+
+Previously we need to define static pages but now next.js can intelligently detect pages which need to be statically generated.
+
+-------------------------------------------------------
+
+
+Hydration :
+
+one more optimization:
+But tell me first what is system and client components 
+
+Some components are there which re rendered on server side but never re rendered on client side.
+so such pages which change over time we have to define use "clients" over the page
+
+server page: which never re renders after delivering from end of server 
+
+server components are not always server side rendered and client components are not always client sdie rendered
+
+
+client side"
+use state
+use effects 
+RTCPeerConnection
+buttonhelders like onClick 
+
+
+Server side:
+
+
+
+
+
+
+try to make as much as possible server components in a project 
+because when we try to fetch a client side component it changes with time.
+
+clickable things can be client side other can be footer like can be server side rendered
+
+
+
+----------------------------------------------------------------------------
+
+
+crazy client side hydration means that think like a button click me is given from server side rendering 
+for a few second or miliseconds the button has no interactive features like click me which make it use client 
+so hydration provides it interactive features after server side rendering took place completely
+
+
+Something realtime things like current time cause hydration error to remove this we shoudl use useeffect when the interactive feature then only useeffect runs upon mounting
+
+

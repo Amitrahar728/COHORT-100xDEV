@@ -1,0 +1,45 @@
+we are going to learn next auth 
+
+some more are there:
+
+1.) auto0.com -> expensive but used alot
+2.) clerk.com 
+3.) firebase is a little bit easy way 
+
+other methods:
+inhouse using cookies 
+
+
+-----------------------------------------------------------
+First why cannot we use JWT + localstorages
+
+Because when we use react we store our jwt token inside localstorage 
+and in every request we sent back this jwt token so that the backend can ensure that we are the one autorized before
+
+but in next.js what happens that there happens a server side rendering take place and we cannot send 
+token in the very first request we cannot access local storage with request headers for authorization .
+
+we cannot even use localstorage for authentication in next.js
+because we cannot send our authentication so server cannot provide user specific data based upon token
+
+if we want to use server side rendering in next.js we cannot use the localstorage+header approach 
+
+
+okaay read it once again as :
+
+Think what we did in react we fetches the token after checking in database that this user exists in db upon sign in 
+upon sign in locally a token get stored inside in localstorage .
+token is generated in nextjs too during signin and get stored in next.js 
+but problem happens when we go to request next thing what in react is done as token is provided and authenticated by using a usermiddleware inbetween this 
+that means the token needed to be authenticated before access to that particular page in react we did by middleware 
+when we provide token for next requests in next.js this cannot perform server side rendering that why it is not 
+benificial because we are losing server side rendering here server only provides blank html after taht via hydration client side provides data 
+and we cannot send authorization header in very first request because in first request nextjs can provide user specific complete html but in first 
+request anyhow we cannot provide authorization token .
+
+-----------------------------------------------------
+
+Catch -all : previously discussed in firstday.txt 
+catches all the folders inside particular folder using [...foldername]
+
+
