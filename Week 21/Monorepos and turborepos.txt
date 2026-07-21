@@ -1,0 +1,78 @@
+Mono Repo : single repository which provides us a same place for frontend and backend.
+
+Some disadvantages are also there like when you want to contribute to frontend only you need to clone backend also in local machine .
+
+
+-> We are going to work with turborepos in node.js : why because if something is common in both frontend backend then we can create common module which is connected with both 
+
+Turbo repo make the 
+
+Turbo system is build system orchaestrator.
+
+Three are 3 things:
+
+Build System :
+
+
+
+build system orchaestrator:
+It tells which build should run right now which flow should be followed
+to build application which frontend , which backend 
+
+
+
+monorepo framework:
+
+a mongorepo framework provides tools and conventions for managing projects that
+
+
+
+Turbo Repo Features:
+
+1.) Caching : Turbo repo caches the outputs of tasks ,
+so if you run a task with same inputs as previous it picks up the output from the 
+cache 
+similarly if u are using lerna and other frameworks for build application it builds all files again even if you 
+have done a change in backend only (if something changes only for that file it regenerate for other it uses cache).
+CI/CD pipelines will pick up from cache memory .
+
+2.) Parrallelization : it can run independent tasks in parrallel , making efficient use of your machine resources this 
+reduces overall time needed to complete all tasks .(can also done in lerna).
+
+3.) Dependency Graph Awareness : 
+Turbo repo understand the dependency grpah of your monorepo . 
+(it knows which packages depends on each other and can ensure tasks are run in correct order ).
+There is a kind of DAG graph (directed acyclic grpah ) then it builds a sequence in topological order and 
+in that way it starts solving .
+
+
+
+instead of manually building by editing script dev in our package .json which led to serially building of our monorepo application 
+we use turborepo which uses Dependency graph and build monorepo parrallely by understanding dependency .
+
+
+
+//
+When we are going to build applications the only changed project part is going to build others will be cached and build become fast .
+and if we update anything inside packages which are common for both so the complete project will be build again in this case .
+
+
+
+----------------------------------------------------------------------------------------------------------
+Simple explanation :
+Companies mostly prefer that a single repo contains all there projects code which is known as monorepo
+and this is implemented using turborepo build orchestrator so that you can efficiently work efficiently 
+with all folders together a single repo containing frontend backend .
+
+
+There are two thinks apps and packages in workspace part of package.json 
+
+App contains two frontends web and docs if your application only have one frontend delete one of them 
+
+and packages contain the some components which are common across both backend and frontend parts 
+
+
+Now how does apps and packages are linked:
+visit both folders package.json file that packages/package.json contain name attribute name same as 
+apps package.json defined it that how they are connected 
+

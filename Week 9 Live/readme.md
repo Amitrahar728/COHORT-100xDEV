@@ -4,6 +4,10 @@ https://www.canva.com/design/DAGStTo7_1Y/H-uoNlkdJ2X4P3LbOME45Q/edit
 
 
 -----------------------------------------------------
+
+Back story : in 2013 facebook apni problem ko solve krne k liye ye library lekr ayyi usme notification update nhi hote the isliye kyunki vo pehle PHP use kr rhe the 
+
+
 when we think about react :
 we come out with jsx , state , components , static and dynamic websites , re rendering .
 
