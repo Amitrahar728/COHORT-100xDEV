@@ -1,6 +1,6 @@
 import { Client } from "pg";
 
-const pgclient = new Client("postgresql://neondb_owner:npg_ORvJzMA8r6dC@ep-broad-smoke-apfoch54-pooler.c-7.us-east-1.aws.neon.tech/neondb?sslmode=verify-full&channel_binding=require")
+const pgclient = new Client("e")
 
 // can be done any way as pgclient or pgclient2
 // const pgClient2 = new Client({
