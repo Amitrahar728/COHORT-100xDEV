@@ -2,15 +2,6 @@ import { Client } from "pg";
 
 const pgclient = new Client("e")
 
-// can be done any way as pgclient or pgclient2
-// const pgClient2 = new Client({
-//     user :"neondb_owner",
-//     password :"npg_ORvJzMA8r6dC",
-//     port :5432,
-//     host :"ep-broad-smoke-apfoch54-pooler.c-7.us-east-1.aws.neon.tech",
-//     database:"neondb",
-//     ssl: true
-// })
 
 
 
